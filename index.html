@@ -14,39 +14,30 @@
 }
 
 body {
-min-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-font-family: 'Poppins', sans-serif;
-position: relative;
-overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Blurred background layer */
+/* Background layers */
 body::before {
-content: "";
-position: absolute;
-inset: 0;
-background: url("gradpic.jpg") center/cover no-repeat;
-filter:  brightness(1.0);
-transform: scale(1.2);
-z-index: -2;
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("gradpic.jpg") center/cover no-repeat;
+    filter: brightness(1.0);
+    z-index: -2;
 }
-
-/* Main sharp image layer */
 body::after {
-content: "";
-position: absolute;
-inset: 0;
-background: url("gradpic.jpg") center/contain no-repeat;
-z-index: -1;
-}
-
-
-@keyframes float {
-    from { transform: translateY(0px); }
-    to { transform: translateY(40px); }
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("gradpic.jpg") center/contain no-repeat;
+    z-index: -1;
 }
 
 .container {
@@ -57,11 +48,13 @@ z-index: -1;
     backdrop-filter: blur(25px);
     background: rgba(255, 255, 255, 0.05);
     box-shadow: 0 0 60px rgba(255, 140, 0, 0.3);
-    width: 90%;
-    max-width: 900px;
+    width: 900px;
+    max-width: 90%;
     gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
 
 .school-name {
     font-family: 'Playfair Display', serif;
@@ -71,23 +64,24 @@ z-index: -1;
     -webkit-text-fill-color: transparent;
 }
 
-.line{
-height:5px;
-width:600px;
-margin:15px auto;
-background:#003cff93;
-opacity: 0.9;
-position:relative;
+.line {
+    height: 5px;
+    width: 600px;        /* desktop width */
+    max-width: 90%;      /* never exceeds 90% of screen */
+    margin: 15px auto;
+    background: #003cff93;
+    opacity: 0.9;
+    position: relative;
 }
 
-.line::after{
-content:"";
-position:absolute;
-bottom:-8px;
-left:0;
-height:3px;
-width:600px;
-background:#ffae00bd;
+.line::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    height: 3px;
+    width: 100%;        /* always matches parent width */
+    background: #ffae00bd;
 }
 
 .subtitle {
@@ -95,6 +89,7 @@ background:#ffae00bd;
     font-weight: 300;
     letter-spacing: 2px;
     opacity: 0.9;
+    font-size: 1.2rem;
 }
 
 .countdown {
@@ -111,7 +106,7 @@ background:#ffae00bd;
     border-radius: 20px;
     min-width: 120px;
     transition: 0.3s;
- 
+    text-align: center;
 }
 
 .box:hover {
@@ -133,30 +128,59 @@ background:#ffae00bd;
 .footer {
     margin-top: 40px;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.rem;
+    font-size: 1rem;
     letter-spacing: 2px;
     opacity: 0.8;
     background-color: #2304ad;
     border-radius: 50px;
-    margin-left: 150px;
-    margin-right: 150px;
+    margin-left: auto;
+    margin-right: auto;
     color: #fff;
-      text-align: center;
-      text-shadow: 
+    text-align: center;
+    text-shadow: 
         0 0 5px rgb(248, 248, 248),
         0 0 10px rgb(245, 245, 245),
         0 0 20px rgb(255, 255, 255),
         0 0 40px rgb(232, 238, 238);
-    padding: 10px;
+    padding: 10px 20px;
+}
+
+/* Media queries for tablets & small screens only */
+@media (max-width: 900px) {
+    .line, .line::after {
+        width: 80%;
+    }
+    .school-name {
+        font-size: 2.5rem;
+    }
+    .box h2 {
+        font-size: 2rem;
+    }
+    .box p, .subtitle {
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 600px) {
+    .container {
+        padding: 30px 20px;
+    }
     .school-name {
         font-size: 2rem;
     }
     .box {
-        min-width: 100px;
         padding: 20px;
+        min-width: 90px;
+    }
+    .box h2 {
+        font-size: 1.5rem;
+    }
+    .box p, .subtitle {
+        font-size: 0.8rem;
+    }
+    .footer {
+        font-size: 0.9rem;
+        padding: 8px 15px;
     }
 }
 </style>
@@ -166,9 +190,8 @@ background:#ffae00bd;
 
 <div class="container">
     <div class="school-name">🎓 <b>Balingasa High School</b></div>
-    <div class="subtitle">Graduation Countdown • March 31, 2026</div>
+    <div class="subtitle"><b>Graduation Countdown • March 31, 2026</b></div>
     <div class="line"></div>
-
     <div class="countdown">
         <div class="box">
             <h2 id="days">00</h2>
